@@ -1,1 +1,1 @@
-web: sh setup.sh && uvicorn send_email:app --reload
+web: sh setup.sh && uvicorn send_email:app --host=0.0.0.0 --port=${PORT:-5000}

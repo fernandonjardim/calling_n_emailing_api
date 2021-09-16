@@ -4,3 +4,4 @@ fastapi
 Pillow
 uvicorn
 twilio
+python-multipart
