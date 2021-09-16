@@ -1,11 +1,6 @@
-os
-dotenv
+python-dotenv
 sendgrid
-base64
 fastapi
-io
-PIL
-os
-dotenv
+Pillow
 uvicorn
 twilio
