@@ -9,6 +9,8 @@ from fastapi import FastAPI, Body, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 import io
 from PIL import Image
+from twilio.rest import Client
+
 
 
 app = FastAPI()
@@ -78,6 +80,23 @@ def sending_email(image, email):
         print(response.headers)
     except Exception as e:
         print(e.message)
+
+
+@app.post("/call")
+async def call(phone: str = Form(...)):
+    account_sid = os.environ['TWILIO_ACCOUNT_SID']
+    auth_token = os.environ['TWILIO_AUTH_TOKEN']
+    client = Client(account_sid, auth_token)
+
+    call = client.calls.create(
+        twiml="<Response><Say> Mark, someone doesn't have the mask on in the main room, please check it now!!!!</Say></Response>", #change the message to be called
+        to = phone, #add here the number you want to call 
+        from_='+32460205885' #add here your twilio number
+        )
+
+    print(call.sid)
+
+
 
 """
 def sending_email():
